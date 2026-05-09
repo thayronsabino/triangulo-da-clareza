@@ -1,40 +1,22 @@
 # triangulo-da-clareza
 
-Uma skill de IA que evita o erro mais caro da automação: escalar processo confuso.
+> IA e automação são multiplicadores. Nunca corretores.
 
-Antes de pensar em IA, prompts, agentes ou integrações, essa skill força clareza sobre o processo.
+Skill de IA para validar processos antes de automatizar. Funciona com Claude Code, Codex e qualquer agente que suporte arquivos de skill em Markdown.
 
-## O que é esta skill
+---
 
-`triangulo-da-clareza` é uma skill em Markdown (`SKILL.md`) compatível com Claude Code, Codex, e qualquer agente de IA que suporte instruções via arquivo de skill. Ela conduz uma análise estruturada de processos em dois níveis:
+## O problema
 
-**Para quem já sabe qual é o problema:** aplica 3 perguntas essenciais que validam se o processo está pronto para automação.
+Automação falha quando escala execução sem entender a decisão por trás. O resultado é fluxo bonito para o problema errado — mais rápido, mais caro, mesmo resultado ruim.
 
-**Para quem ainda não sabe qual é o problema:** faz um pré-diagnóstico que guia o pensamento do usuário — da solução para o problema real — antes de qualquer ferramenta.
+A causa quase sempre é a mesma: ninguém respondeu três perguntas antes de começar.
 
-As 3 perguntas do Triângulo:
-
-1. **Por que este processo existe?**
-2. **O que este processo decide?**
-3. **O que muda de verdade se ele parar?**
-
-Com isso, o usuário sai de "quero automatizar" para "sei exatamente o que automatizar, com qual risco e com qual critério de sucesso".
-
-## O problema que ela resolve
-
-Muita automação falha por um motivo simples: automa-se uma execução sem entender a decisão por trás.
-
-Isso gera:
-- retrabalho com IA
-- fluxo bonito, resultado fraco
-- mais velocidade para o problema errado
-- custo alto com pouco impacto real
-
-Esta skill corrige isso na raiz: **clareza antes de velocidade**.
+---
 
 ## O Triângulo da Clareza
 
-```text
+```
          [POR QUÊ EXISTE?]
                /\
               /  \
@@ -42,124 +24,134 @@ Esta skill corrige isso na raiz: **clareza antes de velocidade**.
 [O QUE DECIDE?]——[O QUE MUDA SE PARAR?]
 ```
 
-### 1) Por quê existe?
-Define a dor que o processo elimina ou o resultado real que ele produz.
+Três perguntas que separam processo pronto para automação de processo pronto para causar problema.
 
-### 2) O que decide?
-Define a decisão concreta suportada pelo processo (e quem depende dela).
+Antes da skill:
+> "Vamos automatizar a triagem de leads."
 
-### 3) O que muda se parar?
-Valida o impacto real (mensurável), não hipótese genérica.
+Depois da skill:
+> "Este processo existe para proteger o tempo do time comercial. Ele suporta a decisão de qual lead recebe contato imediato. Se parar, o dono gasta 4h/semana em reuniões sem potencial — dado real de quando o processo parou por 2 semanas."
 
-## Como a skill conduz o usuário
+Essa diferença determina se a automação vai funcionar ou vai amplificar o problema.
 
-A skill opera em duas etapas antes do triângulo:
+---
 
-0. **Pré-diagnóstico:** identifica se o usuário está descrevendo uma solução ou um problema real. Se necessário, guia o raciocínio com perguntas socráticas até que o problema esteja claro.
+## Como funciona
 
-Depois do triângulo, ela organiza o processo em uma sequência prática:
+A skill opera em sequência:
 
-1. Declaração de intenção do processo
-2. Classificação da decisão (reversível vs irreversível)
-3. Processo mínimo em até 5 passos
-4. Classificação de cada passo:
-   - A: automação simples
-   - B: IA
-   - C: decisão humana
-5. Definição de gatilhos de escalada para passos com IA
-6. Veredito Go/No-Go com score 0-10 e rubrica explícita
+**1. Pré-diagnóstico**
+Antes de qualquer triângulo, identifica se o usuário está descrevendo uma solução ou um problema real. Se necessário, usa perguntas socráticas para chegar ao problema.
 
-Resultado: um plano implementável, com limites claros de autonomia e risco.
+**2. Triângulo da Clareza**
+Aplica as três perguntas com guias de aprofundamento para cada resposta vaga.
+
+**3. Estruturação**
+Transforma as respostas em: declaração de intenção, processo em até 5 passos classificados (A: automação / B: IA / C: humano), gatilhos de escalada e veredito Go/No-Go com score 0–10.
+
+**4. Saída padronizada**
+Entrega um documento Markdown preenchido, pronto para usar como base de implementação.
+
+---
+
+## O que a skill entrega
+
+```markdown
+# Triângulo da Clareza — Triagem de Leads
+
+| Pergunta           | Resposta                                                              |
+|--------------------|-----------------------------------------------------------------------|
+| Por que existe?    | Proteger o tempo do time comercial de contatos sem potencial          |
+| O que decide?      | Se o comercial vai ou não entrar em contato com aquele lead           |
+| O que muda se parar? | Dono gasta 4h/semana em reuniões sem potencial (dado real, 2 semanas) |
+
+> "Este processo existe para proteger o tempo do time comercial..."
+
+**Classificação:** Reversível
+
+| Passo | Ação                        | Categoria |
+|-------|-----------------------------|-----------|
+| 1     | Captura no CRM              | A         |
+| 2     | Classificação por IA        | B         |
+| 3     | Roteamento por score        | A         |
+| 4     | Primeiro contato            | C         |
+| 5     | Atualização do CRM          | A         |
+
+**Gatilho:** Se lead mencionar concorrente ou orçamento acima de R$ 50k, escalar para o comercial.
+
+**Score:** 10/10 — GO para Escala
+```
+
+---
 
 ## Para quem é
 
 - Consultores e analistas de processos
 - Gestores que querem automatizar sem perder controle
-- Times de operações e produto
-- Empresas que já usam IA e querem melhorar qualidade de decisão
-- **Quem ainda não sabe ao certo qual é o problema** que quer resolver
+- Times de produto e operações
+- **Quem não sabe ao certo qual é o problema** que precisa resolver antes de automatizar
 
-## Exemplo de ganho imediato
-
-Sem clareza:
-> "Vamos automatizar a triagem de leads."
-
-Com a skill:
-> "Este processo existe para proteger tempo comercial; decide prioridade de contato; se parar, o dono perde 4h/semana com leads sem potencial."
-
-Esse nível de clareza reduz erro de implementação e aumenta ROI da automação.
-
-## Compatibilidade
-
-Esta skill é um arquivo Markdown com frontmatter padrão. Funciona em qualquer plataforma que suporte instruções via arquivo de skill:
-
-| Plataforma | Caminho padrão de instalação |
-|---|---|
-| **Codex** | `~/.codex/skills/triangulo-da-clareza/SKILL.md` |
-| **Claude Code** | veja instruções de instalação manual abaixo |
-| **Outros agentes** | use `--target` com o caminho da sua plataforma |
+---
 
 ## Instalação
 
-### Opção 1: npx (recomendado)
-
-Instala no caminho padrão do Codex:
+### Codex
 
 ```bash
 npx github:thayronsabino/triangulo-da-clareza
 ```
 
-Com destino customizado (para outras plataformas):
+Instala em `~/.codex/skills/triangulo-da-clareza/SKILL.md`.
 
-```bash
-npx github:thayronsabino/triangulo-da-clareza --target "C:\caminho\da\sua\plataforma\skills"
-```
+### Claude Code
 
-### Opção 2: script PowerShell (Windows)
-
-Instala no caminho padrão:
-
-```powershell
-powershell -ExecutionPolicy Bypass -File .\scripts\install.ps1
-```
-
-Com destino customizado:
-
-```powershell
-powershell -ExecutionPolicy Bypass -File .\scripts\install.ps1 -Target "C:\caminho\customizado\skills"
-```
-
-Caminho padrão de instalação:
-`%USERPROFILE%\.codex\skills\triangulo-da-clareza\SKILL.md`
-
-### Opção 3: instalação manual
-
-Clone o repositório e copie `SKILL.md` para o diretório de skills da sua plataforma.
+Copie o `SKILL.md` para a pasta de skills do seu projeto ou para o diretório de plugins do Claude Code:
 
 ```bash
 git clone https://github.com/thayronsabino/triangulo-da-clareza.git
+cp triangulo-da-clareza/SKILL.md .claude/skills/triangulo-da-clareza.md
 ```
 
-Depois copie `SKILL.md` para onde sua plataforma lê skills.
+### Outros agentes
+
+Use `--target` com o caminho de skills da sua plataforma:
+
+```bash
+npx github:thayronsabino/triangulo-da-clareza --target "/caminho/da/sua/plataforma/skills"
+```
+
+### Windows (PowerShell)
+
+```powershell
+# Caminho padrão (Codex)
+powershell -ExecutionPolicy Bypass -File .\scripts\install.ps1
+
+# Caminho customizado (outras plataformas)
+powershell -ExecutionPolicy Bypass -File .\scripts\install.ps1 -Target "C:\caminho\skills"
+```
+
+---
 
 ## Como usar
 
-Depois de instalar, peça ao seu agente de IA algo como:
+Depois de instalar, peça ao seu agente:
 
-- "Aplique o Triângulo da Clareza neste processo"
-- "Quero automatizar meu atendimento, use esta skill"
-- "Mapeie meu processo em 5 passos e classifique A/B/C"
-- "Não sei bem qual é meu problema, me ajude a entender antes de automatizar"
+- `"Aplique o Triângulo da Clareza neste processo"`
+- `"Quero automatizar meu atendimento — use o Triângulo da Clareza"`
+- `"Não sei exatamente qual é o meu problema, me ajude a entender antes de pensar em automação"`
 
-## Estrutura do repositório
+---
 
-- `SKILL.md`: instruções completas da skill — compatível com qualquer agente que leia arquivos de skill em Markdown.
-- `bin/install.js`: instalador para `npx`.
-- `scripts/install.ps1`: instalador direto no Windows.
+## Compatibilidade
 
-## Princípio central
+| Plataforma | Status |
+|---|---|
+| Codex | instalação via `npx` |
+| Claude Code | instalação manual do `SKILL.md` |
+| Outros agentes com suporte a skills | via `--target` |
 
-> IA e automação são multiplicadores. Nunca corretores.
+---
 
-Se o processo está confuso, a automação só acelera confusão.  
-Se o processo está claro, a automação vira vantagem competitiva.
+## Licença
+
+MIT
