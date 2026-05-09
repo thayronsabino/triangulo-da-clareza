@@ -1,0 +1,17 @@
+{
+  "name": "triangulo-da-clareza",
+  "version": "1.0.0",
+  "description": "Skill Codex para aplicar o Triangulo da Clareza em processos.",
+  "private": false,
+  "license": "MIT",
+  "bin": {
+    "triangulo-da-clareza": "bin/install.js"
+  },
+  "files": [
+    "SKILL.md",
+    "bin/install.js",
+    "scripts/install.ps1",
+    "README.md",
+    "LICENSE"
+  ]
+}
