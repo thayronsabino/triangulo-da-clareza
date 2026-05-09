@@ -1,4 +1,4 @@
-# triangulo-da-clareza
+# Triangulo da clareza
 
 > IA e automação são multiplicadores. Nunca corretores.
 
