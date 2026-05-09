@@ -21,6 +21,15 @@ Aplique o Triângulo da Clareza sempre que o usuário:
 - Precisar validar se um processo está pronto para automação
 - Estiver criando sistemas, fluxos, ou agentes de IA
 
+## Modo de Aplicação
+
+Escolha o modo conforme o contexto da conversa:
+
+- **Modo Rápido (diagnóstico inicial):** Triângulo da Clareza + Declaração de Intenção + Veredito Go/No-Go.
+- **Modo Completo (implementação):** Triângulo da Clareza + Declaração + Classificação de decisão + 5 passos + A/B/C + Gatilhos de escalada + Veredito Go/No-Go.
+
+Se o usuário não especificar, comece no **Modo Rápido** e evolua para o **Modo Completo** ao validar interesse em execução.
+
 ## O Triângulo da Clareza
 
 Todo processo precisa responder a três perguntas antes de ser automatizado:
@@ -117,6 +126,18 @@ Hipotético é fácil. Todo processo parece importante quando você especula sob
 
 3. **Em quanto tempo o problema aparece?** Se o processo parar hoje, o problema aparece em 10 minutos, 24 horas ou 30 dias? A velocidade do impacto revela a criticidade real.
 
+### Quando não houver dado real disponível
+
+Se o usuário não tiver histórico real, **não invente precisão**. Estruture assim:
+
+- **Hipótese de impacto:** o que provavelmente ocorre se o processo parar
+- **Evidência necessária:** dado objetivo que confirmará/refutará a hipótese
+- **Plano de coleta (7 dias):** como medir, quem mede, quando revisar
+
+Formato:
+
+> "Hoje ainda não há evidência histórica suficiente. Hipótese: [impacto provável]. Evidência necessária: [métrica/registro]. Plano de coleta: [ação], responsável [nome/papel], revisão em [data]."
+
 **O que as respostas revelam:**
 
 - **Impacto imediato e mensurável**: processo é crítico. Automatizar com critério e gatilho de escalada obrigatório.
@@ -151,6 +172,16 @@ Antes de automatizar, classifique a decisão que o processo suporta:
 | **Irreversível** | Difícil ou impossível de desfazer | Alto |
 
 **Regra prática:** Processos que suportam decisões irreversíveis exigem validação humana obrigatória, mesmo com IA. A automação pode acelerar. A decisão final permanece com o humano.
+
+### Guardrails obrigatórios para decisões irreversíveis
+
+Se a decisão for **irreversível**, exigir no mínimo:
+
+1. **Aprovação humana nominal** (quem aprova e em que etapa)
+2. **Dupla validação** (segundo revisor para casos críticos)
+3. **Registro de decisão** (critério usado, data/hora, responsável)
+4. **Plano de rollback operacional** (quando aplicável)
+5. **Critério de bloqueio automático** (quando a IA deve parar e escalar)
 
 ## Processo Mínimo (5 Passos)
 
@@ -234,6 +265,47 @@ Quando o usuário descrever um processo:
 4. **Documente os 5 Passos** - entrada, ação, saída, responsável
 5. **Classifique cada Passo** - A (automação), B (IA), ou C (humano)
 6. **Defina Gatilhos de Escalada** - para todos os passos B (IA)
+7. **Emita Veredito Go/No-Go** - com score de clareza e próxima ação recomendada
+
+## Veredito Go/No-Go para Automação
+
+Ao final, pontue o processo de **0 a 10**:
+
+- **0-3:** processo indefinido
+- **4-6:** processo parcialmente claro
+- **7-8:** processo claro e automatizável com controle
+- **9-10:** processo claro, medido e pronto para escalar
+
+Regras de decisão:
+
+- **Score < 7:** **NO-GO** (não automatizar ainda)
+- **Score >= 7:** **GO condicionado** (automatizar com gatilhos e revisão)
+- **Score >= 9:** **GO para escala** (automatização com monitoramento contínuo)
+
+Critérios mínimos de pontuação:
+
+1. Porquê claro e mensurável
+2. Decisão explícita e com dono
+3. Impacto de parada real (ou plano de coleta objetivo)
+4. Processo em até 5 passos
+5. Gatilhos de escalada definidos para passos com IA
+
+## Contrato de Saída Obrigatória
+
+Sempre responda com esta estrutura final:
+
+1. **Triângulo da Clareza**
+2. **Declaração de Intenção**
+3. **Classificação da Decisão (Reversível/Irreversível)**
+4. **Processo em até 5 Passos**
+5. **Classificação A/B/C por passo**
+6. **Gatilhos de Escalada**
+7. **Veredito Go/No-Go + Score (0-10)**
+8. **Próxima ação recomendada (1 passo prático)**
+
+Se faltar dado crítico, incluir:
+- **Lacuna de evidência**
+- **Plano de coleta em 7 dias**
 
 ## Sinais de Alerta
 
@@ -245,7 +317,7 @@ Se o usuário:
 
 Nesses casos, volte ao Triângulo da Clareza e refine antes de avançar.
 
-## Exemplo Completo
+## Apêndice: Exemplo Completo (referência)
 
 **Processo:** Triagem de leads que chegam pelo site
 
