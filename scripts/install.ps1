@@ -1,3 +1,7 @@
+param(
+  [string]$Target = ""
+)
+
 $ErrorActionPreference = "Stop"
 
 $skillName = "triangulo-da-clareza"
@@ -8,7 +12,13 @@ if (-not (Test-Path -LiteralPath $sourceSkill)) {
   throw "SKILL.md nao encontrado em $sourceSkill"
 }
 
-$targetDir = Join-Path $HOME ".codex\skills\$skillName"
+# Caminho padrao para Codex. Use -Target para outras plataformas (Claude Code, etc).
+if ($Target -ne "") {
+  $targetDir = Join-Path $Target $skillName
+} else {
+  $targetDir = Join-Path $HOME ".codex\skills\$skillName"
+}
+
 New-Item -ItemType Directory -Path $targetDir -Force | Out-Null
 Copy-Item -LiteralPath $sourceSkill -Destination (Join-Path $targetDir "SKILL.md") -Force
 

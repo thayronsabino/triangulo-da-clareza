@@ -13,6 +13,7 @@ const customTarget =
 
 const skillName = "triangulo-da-clareza";
 const sourceSkill = path.resolve(__dirname, "..", "SKILL.md");
+// Caminho padrão para Codex. Para outras plataformas, use --target com o caminho correto.
 const defaultTarget = path.join(os.homedir(), ".codex", "skills");
 const targetRoot = customTarget || defaultTarget;
 const destinationDir = path.join(targetRoot, skillName);

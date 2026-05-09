@@ -1,7 +1,7 @@
 {
   "name": "triangulo-da-clareza",
   "version": "1.0.0",
-  "description": "Skill Codex para aplicar o Triangulo da Clareza em processos.",
+  "description": "Skill de IA para aplicar o Triangulo da Clareza em processos — compativel com Claude Code, Codex e outros agentes.",
   "private": false,
   "license": "MIT",
   "bin": {
